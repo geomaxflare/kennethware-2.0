@@ -128,7 +128,6 @@
             $assignmentID = $responseData['id'];
             // Returns new assignment ID
             return $assignmentID;
-
         }
         function createGenericDiscussion($courseID, $discussionParams){
             $createDiscussionURL = "courses/".$courseID."/discussion_topics";
@@ -201,6 +200,31 @@
             $apiUrl = "courses/".$courseID."/modules/".$moduleID;
             $apiParams = "module[position]=".$modulePosition;
             $response = curlPut($apiUrl, $apiParams);
+            return $response;
+        }
+        function listStudentEnrollments($courseID){
+            $apiUrl = "courses/".$courseID."/enrollments?type[]=StudentEnrollment";
+            $response = curlGet($apiUrl);
+            return $response;
+        }
+		function listStudentEnrollmentsSec($section_id){
+            $apiUrl = "sections/".$section_id."/enrollments";
+            $response = curlGet($apiUrl);
+            return $response;
+        }
+		function listStudentEnrollmentsUser($user_id){
+            $apiUrl = "users/sis_user_id:".$user_id."/enrollments";
+            $response = curlGet($apiUrl);
+            return $response;
+        }
+		function listCoursesUser($user_id){
+            $apiUrl = "users/sis_user_id:".$user_id."/courses";
+            $response = curlGet($apiUrl);
+            return $response;
+        }
+		function getCourseList(){
+            $apiUrl = "courses";
+            $response = curlGet($apiUrl);
             return $response;
         }
 ?>
